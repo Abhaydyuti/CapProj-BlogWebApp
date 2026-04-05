@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responses App</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <h1>📝 Responses</h1>
+
+  <!-- ✅ CREATE FORM -->
+  <h2>Create New Response</h2>
+  <form action="/responses" method="POST">
+    <input type="text" name="name" placeholder="Your name" required />
+    <textarea name="message" placeholder="Your message" rows="3" required></textarea>
+    <button type="submit">➕ Submit</button>
+  </form>
+
+  <hr />
+
+  <!-- 📋 ALL RESPONSES -->
+  <h2>All Responses (<%= responses.length %>)</h2>
+
+  <% if (responses.length === 0) { %>
+    <p>No responses yet. Be the first! 👆</p>
+  <% } %>
+
+  <% responses.forEach(function(r) { %>
+    <div class="card">
+      <p><strong>👤 <%= r.name %></strong></p>
+      <p>💬 <%= r.message %></p>
+      <small>🕒 <%= r.createdAt %></small>
+      <% if (r.updatedAt) { %>
+        <small> | ✏️ Edited: <%= r.updatedAt %></small>
+      <% } %>
+
+      <br /><br />
+
+      <!-- 🩹 EDIT BUTTON (toggle form) -->
+      <button class="btn-edit" data-id="<%= r.id %>" onclick="toggleEdit(this.dataset.id)">✏️ Edit</button>
+      
+
+      <!-- 🗑️ DELETE FORM -->
+      <form action="/responses/<%= r.id %>/delete" method="POST" style="display:inline;">
+        <button class="btn-delete" type="submit">🗑️ Delete</button>
+      </form>
+
+      <!-- 🩹 EDIT FORM (hidden until Edit clicked) -->
+      <div class="edit-form" id="edit-<%= r.id %>">
+        <form action="/responses/<%= r.id %>/edit" method="POST">
+          <input type="text" name="name" value="<%= r.name %>" required />
+          <textarea name="message" rows="3" required><%= r.message %></textarea>
+          <button class="btn-save" type="submit">💾 Save</button>
+        </form>
+      </div>
+
+    </div>
+  <% }) %>
+
+  <script>
+  function toggleEdit(id) {
+    const form = document.getElementById("edit-" + id);
+    form.style.display = form.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

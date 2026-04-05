@@ -1,0 +1,8 @@
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    input, textarea { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
+    button { padding: 8px 16px; cursor:pointer; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 12px 0; }
+    .btn-delete { background: red; color: white; border: none; }
+    .btn-edit { background: orange; color: white; border: none; }
+    .btn-save { background: green; color: white; border: none; }
+    .edit-form { display: none; margin-top: 10px; } /* hidden by default */
